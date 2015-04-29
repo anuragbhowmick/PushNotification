@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration>
+	<Properties>
+		<Property name="optimusDbCacheFileParent">/disk1/logs/pushNotificationLogs</Property>
+		<Property name="debugFileParent">${optimusDbCacheFileParent}/debug</Property>
+		<Property name="errorFileParent">${optimusDbCacheFileParent}/error</Property>
+		<Property name="infoFileParent">${optimusDbCacheFileParent}/info</Property>
+	</Properties>
+
+	<Appenders>
+ 		<RollingFile name="debugLog" fileName="${debugFileParent}/debug.log"
+			filePattern="${debugFileParent}/archive/debug-%d{dd-MM-yyyy-HH:mm:ss}.log">
+			<Policies>
+				<SizeBasedTriggeringPolicy size="100 MB" />
+			</Policies>
+			<PatternLayout
+				pattern="%d{HH:mm:ss.SSS} %-5level [THREAD ID=%t] %logger{36} %marker - %m%n" />
+		</RollingFile>
+		
+		<RollingFile name="errorLog" fileName="${errorFileParent}/error.log"
+			filePattern="${errorFileParent}/archive/error-%d{dd-MM-yyyy-HH:mm:ss}.log">
+			<TimeBasedTriggeringPolicy interval="3600"
+				modulate="true" />
+			<PatternLayout
+				pattern="%d{HH:mm:ss.SSS} %-5level [THREAD ID=%t] %logger{36} %marker - %m%n" />
+		</RollingFile>
+
+		<RollingFile name="infoLog" fileName="${infoFileParent}/info.log"
+			filePattern="${infoFileParent}/archive/info-%d{dd-MM-yyyy-HH:mm:ss}.log">
+			<TimeBasedTriggeringPolicy interval="3600"
+				modulate="true" />
+			<PatternLayout
+				pattern="%d{HH:mm:ss.SSS} %-5level [THREAD ID=%t] %logger{36} %marker - %m%n" />
+		</RollingFile>
+
+ 
+	</Appenders>
+
+	<Loggers>
+		<Logger name="com.vizury.PushNotification" level="debug"
+			additivity="false">
+			<AppenderRef ref="debugLog" level="debug" />
+			<AppenderRef ref="errorLog" level="warn" />
+			<AppenderRef ref="infoLog" level="info" />
+		</Logger>
+
+		<Logger name="com.google.android.gcm.server" level="debug"
+			additivity="false">
+			<AppenderRef ref="debugLog" level="debug" />
+			<AppenderRef ref="errorLog" level="warn" />
+			<AppenderRef ref="infoLog" level="info" />
+		</Logger>
+		
+		<Root level="info">
+		</Root>
+
+	</Loggers>
+</Configuration>
