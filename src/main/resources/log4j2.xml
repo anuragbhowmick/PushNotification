@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Configuration>
 	<Properties>
-		<Property name="optimusDbCacheFileParent">/disk1/logs/pushNotificationLogs</Property>
+		<Property name="optimusDbCacheFileParent">/disk1/logs/PushNotificationLogs</Property>
 		<Property name="debugFileParent">${optimusDbCacheFileParent}/debug</Property>
 		<Property name="errorFileParent">${optimusDbCacheFileParent}/error</Property>
 		<Property name="infoFileParent">${optimusDbCacheFileParent}/info</Property>
@@ -44,13 +44,6 @@
 			<AppenderRef ref="infoLog" level="info" />
 		</Logger>
 
-		<Logger name="com.google.android.gcm.server" level="debug"
-			additivity="false">
-			<AppenderRef ref="debugLog" level="debug" />
-			<AppenderRef ref="errorLog" level="warn" />
-			<AppenderRef ref="infoLog" level="info" />
-		</Logger>
-		
 		<Root level="info">
 		</Root>
 
